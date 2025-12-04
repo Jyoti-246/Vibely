@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
 import CurrentUserInfo from "../../ui/currentUserInfo";
 import { useChatMessages } from "./useChatMessages";
 import ChatMessage from "./ChatMessage";
@@ -77,7 +75,7 @@ const UserChatBox = ({ metaData, currentChat }) => {
         <div className="relative flex gap-2">
           {showPicker && (
             <div className="absolute right-0 bottom-14 z-50 rounded-lg shadow-lg">
-              <Picker data={data} onEmojiSelect={addEmoji} />
+              {/* <Picker data={data} onEmojiSelect={addEmoji} /> */}
             </div>
           )}
           <div className="bg-tertiary flex w-full items-center gap-4 rounded-2xl px-6 py-2">
