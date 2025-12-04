@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@theme {
+  --font-bakbak: "Bakbak One", sans-serif;
+  --font-Montserrat: "Montserrat", sans-serif;
+  --color-background: #1a1c26;
+
+  --color-primary: #8c67f6;
+  --color-secondary: #272932;
+  --color-tertiary: #383a45;
+
+  --color-text-primary: #fff;
+  --color-text-secondary: #8f8f8f;
+  --color-text-tertiary: #7f7f7f;
+}
