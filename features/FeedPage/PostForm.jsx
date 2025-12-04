@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUpdatePost } from "./useUpdatePost";
 import { useCreatePost } from "./useCreatePost";
 import { useForm } from "react-hook-form";
-import CurrentUserInfo from "../../ui/currentUserInfo";
+import CurrentUserInfo from "../../ui/CurrentUserInfo";
 import { FaRegImage } from "react-icons/fa6";
 import { useState } from "react";
 import { useUser } from "../authentication/useUser";

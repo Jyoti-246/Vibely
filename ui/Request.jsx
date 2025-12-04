@@ -1,6 +1,6 @@
 import React from "react";
 import { useMetaDataById } from "../features/Messagesfeatures/useMetaDataById";
-import CurrentUserInfo from "./currentUserInfo";
+import CurrentUserInfo from "./CurrentUserInfo";
 import { useCreateFollow } from "../features/profile/useCreateFollow";
 import Button from "./Button";
 import { NavLink } from "react-router-dom";

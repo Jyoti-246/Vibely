@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CurrentUserInfo from "../../ui/currentUserInfo";
+import CurrentUserInfo from "../../ui/CurrentUserInfo";
 import { useChatMessages } from "./useChatMessages";
 import ChatMessage from "./ChatMessage";
 import { useCreateMessage } from "./useCreateMessage";

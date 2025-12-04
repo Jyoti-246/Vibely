@@ -2,7 +2,7 @@ import React from "react";
 import { useMetaDataById } from "../features/Messagesfeatures/useMetaDataById";
 import { useDeleteRequestFollow } from "../features/profile/useDeleteRequestFollow";
 import { useUpdateFollow } from "../features/profile/useUpdateFollow";
-import CurrentUserInfo from "./currentUserInfo";
+import CurrentUserInfo from "./CurrentUserInfo";
 import { NavLink } from "react-router-dom";
 import { useCreateFollow } from "../features/profile/useCreateFollow";
 import { useGetSpecificFollowInfo } from "../features/profile/useGetSpecificFollowInfo";
