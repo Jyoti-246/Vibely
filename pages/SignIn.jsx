@@ -4,12 +4,11 @@ import Logo from "../ui/Logo";
 
 const SignIn = () => {
   return (
-    <div className="bg-background flex h-screen items-center">
-      <div className="flex-2 text-blue-950">
-        <span>
-          <Logo />
-        </span>
-        <span className="flex flex-col gap-4">
+    <div className="bg-background flex h-screen p-10">
+      <Logo />
+
+      <div className="flex w-full items-center justify-between gap-4">
+        <span className="flex flex-2 flex-col gap-4">
           <div className="flex gap-2">
             <span className="flex -space-x-4">
               <img
@@ -28,27 +27,27 @@ const SignIn = () => {
                 className="h-9 w-9 rounded-full"
               />
             </span>
-            <span className="text-sm font-semibold">
+            <span className="text-text-secondary text-sm font-semibold">
               <p>⭐⭐⭐⭐⭐</p>
               <p>Used by 12k+ developers</p>
             </span>
           </div>
-          <span className="text-6xl font-bold">
+          <span className="text-text-primary text-6xl font-bold">
             More than just friends truly connect
           </span>
-          <span className="w-92 text-2xl">
+          <span className="text-text-secondary text-2xl">
             Connect with global community on vibely
           </span>
         </span>
-      </div>
-      <div className="h-fit flex-1 rounded-xl bg-white px-8 py-5 shadow-2xl">
-        <div className="flex flex-col items-center">
-          <span className="font-bold">Sign in to vibely</span>
-          <span className="text-xs font-medium text-stone-600">
-            Welcome back! Please sign in to continue
-          </span>
+        <div className="flex-1 rounded-xl bg-white px-8 py-5 shadow-2xl">
+          <div className="flex flex-col items-center">
+            <span className="font-bold">Sign in to vibely</span>
+            <span className="text-xs font-medium text-stone-600">
+              Welcome back! Please sign in to continue
+            </span>
+          </div>
+          <SignInForm />
         </div>
-        <SignInForm />
       </div>
     </div>
   );

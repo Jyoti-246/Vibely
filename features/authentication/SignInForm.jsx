@@ -26,11 +26,7 @@ const SignInForm = () => {
   }
 
   return (
-    <form
-      action=""
-      className="mt-8 flex flex-col gap-2"
-      onSubmit={handleSubmit}
-    >
+    <form action="" className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <label htmlFor="email">Email address</label>
       <input
         type="email"
