@@ -9,6 +9,7 @@ import { useMetaData } from "../features/Messagesfeatures/useMetaData";
 import { useDeleteLike } from "../features/profile/useDeleteLike";
 import { useCreateLikes } from "../features/profile/useCreateLikes";
 import { useCreateComment } from "../features/profile/useCreateComment";
+import Button from "./Button";
 
 const ActivePost = () => {
   const [commentMessage, setCommentMessage] = useState("");
@@ -57,11 +58,11 @@ const ActivePost = () => {
     );
   }
   return (
-    <div className="mx-40 my-10 flex h-160 w-220 rounded-2xl bg-amber-200">
-      <div className="h-160 w-120">
+    <div className="bg-secondary mx-40 my-10 flex h-160 w-220 rounded-2xl">
+      <div className="flex-1">
         <img src={post?.image} alt="" className="h-full w-full rounded-2xl" />
       </div>
-      <div className="flex flex-col px-3">
+      <div className="flex flex-1 flex-col px-3">
         <div className="h-140">
           <div className="mx-2 mt-2 flex">
             <img
@@ -70,7 +71,9 @@ const ActivePost = () => {
               className="z-10 m-1 h-10 w-10 rounded-full"
             />
             <div className="flex flex-col">
-              <span className="font-semibold text-gray-800">{user_name}</span>
+              <span className="text-text-primary font-semibold">
+                {user_name}
+              </span>
             </div>
           </div>
           <div className="mx-2 mt-2 flex">
@@ -80,8 +83,10 @@ const ActivePost = () => {
               className="z-10 m-1 h-10 w-10 rounded-full"
             />
             <div className="flex gap-1">
-              <span className="font-semibold text-gray-800">{user_name}</span>
-              <span className="text-gray-700">{post?.caption}</span>
+              <span className="text-text-primary font-semibold">
+                {user_name}
+              </span>
+              <span className="text-text-secondary">{post?.caption}</span>
             </div>
           </div>
 
@@ -91,17 +96,18 @@ const ActivePost = () => {
             })}
           </ul>
         </div>
-        <div>
+        <div className="flex">
           <input
             type="text"
             value={commentMessage}
             placeholder="Enter your comment"
+            className="text-text-tertiary w-full outline-none focus:ring-0"
             onChange={(e) => setCommentMessage(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handlePostComment()}
           />
-          <button onClick={handlePostComment}>Comment</button>
+          <Button label="Comment" onClick={handlePostComment} />
         </div>
-        <div className="mt-3 flex gap-3 border-t pt-3 text-xl text-stone-500">
+        <div className="text-text-primary mt-3 flex gap-3 border-t py-3 text-xl">
           <button className="flex items-center gap-1 transition">
             {hasLike ? (
               <IoHeart

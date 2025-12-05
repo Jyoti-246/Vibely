@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   BiGroup,
@@ -14,8 +14,10 @@ import { useUser } from "../features/authentication/useUser";
 import { useMetaData } from "../features/Messagesfeatures/useMetaData";
 import { FiPlusCircle } from "react-icons/fi";
 import NavItem from "./NavItem";
+import ModalDuplicate from "./ModalDuplicate";
 
 const Navbar = () => {
+  const [openModal, setOpenModal] = useState(false);
   const { user } = useUser();
   const { metaData } = useMetaData(user?.email);
   const user_name = metaData?.[0].user_name;
@@ -28,15 +30,19 @@ const Navbar = () => {
       <NavItem to="/discover" label="Discover" icon={BiSearchAlt2} />
       <NavItem to={`/profile/${user_name}`} label="Profile" icon={BiUser} />
 
-      {/* <Modal>
-        <Modal.Open opens="create-form">
-          <Button logo={<FiPlusCircle />} label="Create Post" />
-        </Modal.Open>
+      <Button
+        logo={<FiPlusCircle />}
+        label="Create Post"
+        onClick={() => setOpenModal(true)}
+      />
 
-        <Modal.Window name="create-form">
-          <PostForm />
-        </Modal.Window>
-      </Modal> */}
+      <ModalDuplicate
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        title="Create Post"
+      >
+        <PostForm />
+      </ModalDuplicate>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { useDeletePost } from "../features/FeedPage/useDeletePost";
 import Modal from "./Modal";
@@ -8,10 +8,15 @@ import ConfirmDelete from "./ConfirmDelete";
 import PostForm from "../features/FeedPage/PostForm";
 import { useCreateLikes } from "../features/profile/useCreateLikes";
 import { useDeleteLike } from "../features/profile/useDeleteLike";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useCreateComment } from "../features/profile/useCreateComment";
 
 const Post = ({ data, metaData }) => {
+  const [commentMessage, setCommentMessage] = useState("");
+  const navigate = useNavigate();
+  const { createComment } = useCreateComment();
+
   const id = metaData?.[0]?.id;
 
   const { deletePost } = useDeletePost();
@@ -33,6 +38,20 @@ const Post = ({ data, metaData }) => {
         postId,
       });
     else deleteLike({ userId, postId });
+  }
+
+  function handlePostComment() {
+    if (!commentMessage.trim()) return;
+    createComment(
+      {
+        postId,
+        userId,
+        commentMessage,
+      },
+      {
+        onSettled: () => setCommentMessage(""),
+      },
+    );
   }
 
   return (
@@ -120,7 +139,10 @@ const Post = ({ data, metaData }) => {
           </span>
         </button>
 
-        <button className="flex gap-1 text-center">
+        <button
+          className="flex gap-1 text-center"
+          onClick={() => navigate(`/post-id/${postId}`)}
+        >
           <i class="fa-regular fa-comment-dots text-text-primary cursor-pointer text-xl"></i>
           <span className="text-text-primary text-sm font-medium">
             {data?.comments?.length ?? 0}
@@ -179,9 +201,12 @@ const Post = ({ data, metaData }) => {
             type="text"
             className="text-text-secondary flex-1 border-0 bg-transparent px-1 text-sm font-medium outline-none focus:ring-0"
             placeholder="Post a comment.."
+            value={commentMessage}
+            onChange={(e) => setCommentMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handlePostComment()}
           />
 
-          <Button label="Post" />
+          <Button label="Post" onClick={handlePostComment} />
         </div>
       </div>
     </li>

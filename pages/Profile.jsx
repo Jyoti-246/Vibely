@@ -57,28 +57,30 @@ const Profile = ({ metaData }) => {
 
   if (isLoading || isLoadingMetaData) return null;
   return (
-    <div className="no-scrollbar h-screen overflow-scroll px-20 py-10">
-      <div className="h-62 w-full overflow-hidden rounded-2xl">
+    <div className="no-scrollbar relative h-screen overflow-scroll md:px-10 lg:px-20">
+      <div className="h-52 w-full overflow-hidden rounded-b-2xl">
         <img
           src="../coverImage.jpg"
           alt=""
           className="h-full w-full object-cover"
         />
       </div>
-      <UserInfo
-        user_name={user_name}
-        user_avatar={user_avatar}
-        email={email}
-        postLength={postLength}
-        followersLength={followersLength}
-        followingsLength={followingsLength}
-        isCurrentLogedInUserProfile={isCurrentLogedInUserProfile}
-        currentUserId={currentUserId}
-        currentLogedInUserId={currentLogedInUserId}
-        requestedData={requestedData}
-        acceptedData={acceptedData}
-      />
-      <ProfileUserPosts posts={posts} />
+      <div className="absolute top-37 md:mr-10 lg:mr-20">
+        <UserInfo
+          user_name={user_name}
+          user_avatar={user_avatar}
+          email={email}
+          postLength={postLength}
+          followersLength={followersLength}
+          followingsLength={followingsLength}
+          isCurrentLogedInUserProfile={isCurrentLogedInUserProfile}
+          currentUserId={currentUserId}
+          currentLogedInUserId={currentLogedInUserId}
+          requestedData={requestedData}
+          acceptedData={acceptedData}
+        />
+        <ProfileUserPosts posts={posts} />
+      </div>
     </div>
   );
 };

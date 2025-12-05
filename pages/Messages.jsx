@@ -18,6 +18,11 @@ const Messages = () => {
   const { isLoading: isLoadingMessages, allMessages } =
     useUserAllMessages(userId);
 
+  console.log(allMessages);
+  // const reversedMessages = Array.isArray(allMessages)
+  //   ? [...allMessages].reverse()
+  //   : [];
+
   const [currentChat, setCurrentChat] = useState(null);
 
   useEffect(() => {

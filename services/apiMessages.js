@@ -1,14 +1,17 @@
 import supabase from "./supabase";
 
 export async function getMessages(userId) {
-  // if (!userId) return [];
+  console.log(userId);
 
   const { data, error } = await supabase
     .from("messages")
-    .select("*, userMetadata: toUser(*)")
-    .eq("toUser", userId);
+    .select("*")
+    .eq("toUser", userId)
+    .is("seen_time", null);
 
   if (error) throw new Error(`Messages could not be loaded ${error}`);
+
+  console.log(data);
 
   return data;
 }

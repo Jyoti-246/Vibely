@@ -42,7 +42,7 @@ const UserInfo = ({
   }
   return (
     <>
-      <div className="font-Montserrat mx-10 mt-8 flex flex-col items-center gap-3">
+      <div className="font-Montserrat flex flex-col items-center gap-3">
         <img src={user_avatar} alt="" className="h-30 w-30 rounded-full" />
         <div className="flex flex-col gap-1 text-center">
           {user_name && (

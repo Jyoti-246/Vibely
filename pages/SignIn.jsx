@@ -4,11 +4,11 @@ import Logo from "../ui/Logo";
 
 const SignIn = () => {
   return (
-    <div className="bg-background flex h-screen p-10">
+    <div className="bg-background flex h-screen flex-col gap-8 p-10 md:flex-row md:gap-0">
       <Logo />
 
-      <div className="flex w-full items-center justify-between gap-4">
-        <span className="flex flex-2 flex-col gap-4">
+      <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
+        <span className="mt-10 flex flex-col gap-4 md:mt-0 md:flex-2">
           <div className="flex gap-2">
             <span className="flex -space-x-4">
               <img
@@ -32,14 +32,14 @@ const SignIn = () => {
               <p>Used by 12k+ developers</p>
             </span>
           </div>
-          <span className="text-text-primary text-6xl font-bold">
+          <span className="text-text-primary text-2xl font-bold sm:text-3xl md:text-5xl lg:text-6xl">
             More than just friends truly connect
           </span>
-          <span className="text-text-secondary text-2xl">
+          <span className="text-text-secondary md:2xl text-lg">
             Connect with global community on vibely
           </span>
         </span>
-        <div className="flex-1 rounded-xl bg-white px-8 py-5 shadow-2xl">
+        <div className="mt-10 w-full rounded-xl bg-white px-8 py-5 shadow-2xl md:mt-0 md:flex-1">
           <div className="flex flex-col items-center">
             <span className="font-bold">Sign in to vibely</span>
             <span className="text-xs font-medium text-stone-600">
