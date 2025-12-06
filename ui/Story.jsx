@@ -16,12 +16,8 @@ const Story = ({ data }) => {
 
   return (
     <>
-      <li className="font-Montserrat relative h-48 w-38 shrink-0 rounded-xl font-medium">
-        <img
-          src={data.storyImage}
-          alt=""
-          className="h-full w-full rounded-md"
-        />
+      <li className="font-Montserrat relative shrink-0 rounded-xl font-medium">
+        <img src={data.storyImage} alt="" className="h-48 w-38 rounded-md" />
         <div className="absolute right-2 bottom-2 left-2 z-10 flex items-center gap-2">
           <img
             src={data.userMetadata.user_avatar}
