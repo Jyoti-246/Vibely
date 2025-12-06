@@ -1,29 +1,25 @@
 import React from "react";
+import Button from "./Button";
 
-const ConfirmDelete = ({ resourceName, onConfirm, onCloseModal }) => {
+const ConfirmDelete = ({ onConfirm, onCloseModal }) => {
   return (
-    <div className="flex w-[30rem] flex-col gap-[1rem] p-4">
-      <h3 className="text-xl font-semibold text-stone-600">
-        Delete {resourceName}
-      </h3>
-      <p className="text-lg text-stone-500">
-        Are you sure you want to delete this {resourceName} permanently? This
-        action cannot be undone.
+    <div className="flex max-w-100 flex-col">
+      <p className="text-text-secondary text-lg">
+        Are you sure you want to delete this permanently? This action cannot be
+        undone.
       </p>
 
-      <div className="flex justify-end gap-[1.2rem]">
-        <button
+      <div className="flex justify-end gap-4">
+        <Button
+          label="Cancel"
           onClick={onCloseModal}
-          className="rounded-lg border border-stone-300 px-4 py-2"
-        >
-          Cancel
-        </button>
-        <button
+          className="bg-secondary border-text-primary border py-2"
+        />
+        <Button
+          label="Delete"
           onClick={onConfirm}
-          className="rounded-lg bg-red-700 px-4 py-2 text-white"
-        >
-          Delete
-        </button>
+          className="bg-red-700 py-2"
+        />
       </div>
     </div>
   );

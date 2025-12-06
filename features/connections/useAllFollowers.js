@@ -8,7 +8,7 @@ export function useAllFollowers(userId) {
     error,
   } = useQuery({
     queryFn: () => getAllFollowers(userId),
-    queryKey: ["followers"],
+    queryKey: ["followers", userId],
   });
 
   return { allFollowers, isLoading, error };

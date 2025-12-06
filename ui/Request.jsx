@@ -1,19 +1,30 @@
 import React from "react";
 import { useMetaDataById } from "../features/Messagesfeatures/useMetaDataById";
 import CurrentUserInfo from "./CurrentUserInfo";
-import { useCreateFollow } from "../features/profile/useCreateFollow";
 import Button from "./Button";
 import { NavLink } from "react-router-dom";
+import { useDeleteRequestFollow } from "../features/profile/useDeleteRequestFollow";
+import { useUpdateFollow } from "../features/profile/useUpdateFollow";
 
-const Request = ({ request }) => {
+const Request = ({ request, userId }) => {
+  console.log(request);
+
   const { metaData } = useMetaDataById(request);
-  const { createFollow } = useCreateFollow();
+  const { deleteRequest } = useDeleteRequestFollow();
+  const { updateFollow } = useUpdateFollow();
 
-  function handleFollow() {
-    createFollow({
-      followingId: metaData?.[0]?.id,
-      followerId: request?.id,
-      status: "requested",
+  function handleAccept() {
+    updateFollow({
+      followingId: request,
+      followerId: userId,
+      status: "accepted",
+    });
+  }
+
+  function handleDeny() {
+    deleteRequest({
+      followingId: request,
+      followerId: userId,
     });
   }
 
@@ -27,7 +38,14 @@ const Request = ({ request }) => {
         />
       </NavLink>
 
-      <Button label="Follow" onClick={handleFollow} className="py-3" />
+      <div className="flex gap-2">
+        <Button label="Accept" onClick={handleAccept} className="py-3" />
+        <Button
+          label="Deny"
+          onClick={handleDeny}
+          className="bg-tertiary py-3"
+        />
+      </div>
     </li>
   );
 };

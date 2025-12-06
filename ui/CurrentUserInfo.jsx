@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const CurrentUserInfo = ({ user_avatar, user_name, email }) => {
+const CurrentUserInfo = ({ user_avatar, user_name, email, className = "" }) => {
   return (
-    <div className="font-Montserrat flex items-center gap-2">
+    <div className={`font-Montserrat flex items-center gap-2 ${className}`}>
       <img src={user_avatar} alt="" className="h-10 rounded-lg" />
       <div className="flex flex-col">
         {user_name && (

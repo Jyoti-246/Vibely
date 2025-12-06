@@ -91,7 +91,6 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
                 onClick={() => handleCreate(request, user, "rquested")}
                 className="py-3"
               />
-              {/* <button className="mx-2 cursor-pointer rounded-2xl bg-red-400 px-6 py-2 text-xl"></button> */}
             </>
           )}
 

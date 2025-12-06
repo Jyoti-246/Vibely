@@ -1,8 +1,21 @@
 import React from "react";
 import SignInForm from "../features/authentication/SignInForm";
 import Logo from "../ui/Logo";
+import Button from "../ui/Button";
+import { useLogin } from "../features/authentication/useLogin";
 
 const SignIn = () => {
+  const { login } = useLogin();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    login({
+      email: "khushi@gmail.com",
+      password: "12345",
+    });
+  }
+
   return (
     <div className="bg-background flex h-screen flex-col gap-8 p-10 md:flex-row md:gap-0">
       <Logo />
@@ -39,14 +52,23 @@ const SignIn = () => {
             Connect with global community on vibely
           </span>
         </span>
-        <div className="mt-10 w-full rounded-xl bg-white px-8 py-5 shadow-2xl md:mt-0 md:flex-1">
-          <div className="flex flex-col items-center">
-            <span className="font-bold">Sign in to vibely</span>
-            <span className="text-xs font-medium text-stone-600">
-              Welcome back! Please sign in to continue
-            </span>
+        <div className="w-full md:mt-0 md:flex-1">
+          <div className="flex justify-center p-2">
+            <Button
+              label="Login as a test user"
+              className="rounded-2xl px-10 py-4"
+              onClick={handleSubmit}
+            />
           </div>
-          <SignInForm />
+          <div className="mt-10 w-full rounded-xl bg-white px-8 py-5 shadow-2xl md:mt-0 md:flex-1">
+            <div className="flex flex-col items-center">
+              <span className="font-bold">Sign in to vibely</span>
+              <span className="text-xs font-medium text-stone-600">
+                Welcome back! Please sign in to continue
+              </span>
+            </div>
+            <SignInForm />
+          </div>
         </div>
       </div>
     </div>

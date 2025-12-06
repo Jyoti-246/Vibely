@@ -5,19 +5,16 @@ const Comment = ({ comment }) => {
   const { metaData } = useMetaDataById(comment?.userId);
 
   return (
-    <li className="mx-2 mt-2 flex">
-      <img
-        src={metaData?.user_avatar}
-        alt=""
-        className="z-10 m-1 h-10 w-10 rounded-full"
-      />
-      <div className="flex gap-1">
-        <span className="text-text-primary font-semibold">
+    <div className={`font-Montserrat flex items-center gap-2`}>
+      <img src={metaData?.user_avatar} alt="" className="h-8 rounded-md" />
+      <div className="flex flex-col">
+        <span className="text-text-primary text-sm font-normal">
           {metaData?.user_name}
         </span>
-        <span className="text-text-secondary">{comment?.comment}</span>
+
+        <span className="text-text-secondary text-xs">{comment?.comment}</span>
       </div>
-    </li>
+    </div>
   );
 };
 

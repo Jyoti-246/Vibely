@@ -41,7 +41,7 @@ const Navbar = () => {
         setOpenModal={setOpenModal}
         title="Create Post"
       >
-        <PostForm />
+        <PostForm setOpenModal={setOpenModal} />
       </ModalDuplicate>
     </div>
   );

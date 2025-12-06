@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useUpdatePost } from "./useUpdatePost";
 import { useCreatePost } from "./useCreatePost";
 import { useForm } from "react-hook-form";
@@ -9,7 +8,7 @@ import { useUser } from "../authentication/useUser";
 import { useMetaData } from "../Messagesfeatures/useMetaData";
 import Button from "../../ui/Button";
 
-const PostForm = ({ postToEdit = {}, onCloseModal }) => {
+const PostForm = ({ postToEdit = {}, setOpenModal }) => {
   const fileInputRef = useRef();
   const [preview, setPreview] = useState(null);
   const { isLoading, user } = useUser();
@@ -26,15 +25,18 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
     defaultValues: isEditSession ? updateValues : {},
   });
   const { errors } = formState;
-  const navigate = useNavigate();
+
+  console.log(updateValues);
 
   const imageFile = watch("image");
 
-  function handleButtonClick() {
+  function handleButtonClick(e) {
+    e.preventDefault();
     fileInputRef.current.click();
   }
 
   function handleImageChange(e) {
+    e.preventDefault();
     const file = e.target.files?.[0];
     if (file) setPreview(URL.createObjectURL(file));
   }
@@ -49,7 +51,7 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
           newPost: { ...data, image: image },
           id: postId,
         },
-        { onSuccess: () => navigate("/") },
+        { onSuccess: () => setOpenModal(false) },
       );
     } else {
       console.log("this is create session");
@@ -57,7 +59,7 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
       createPost(
         { newPost: { ...data, image: image, userId } },
         {
-          onSuccess: () => navigate("/"),
+          onSuccess: () => setOpenModal(false),
         },
       );
     }
@@ -73,12 +75,12 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
   return (
     <form
       action=""
-      className="bg-secondary flex flex-col gap-4 rounded-xl"
+      className="bg-secondary flex min-w-md flex-col gap-4 rounded-xl"
       onSubmit={handleSubmit(onSubmit, onError)}
     >
       <CurrentUserInfo user_avatar={user_avatar} user_name={user_name} />
 
-      <div className="bg-tertiary flex h-40 w-full items-center rounded-xl">
+      <div className="bg-tertiary flex h-40 w-full items-center justify-center rounded-xl">
         {preview === null ? (
           <div className="flex flex-col items-center gap-3">
             <FaRegImage className="text-secondary h-8 w-8" />
@@ -90,7 +92,7 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
             <input
               type="file"
               accept="image/*"
-              className="hidden-input"
+              className="hidden"
               {...register("image", {
                 onChange: (e) => handleImageChange(e),
               })}
@@ -104,7 +106,7 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
           <img
             src={preview}
             alt="preview"
-            className="mt-2 h-40 w-full rounded-xl"
+            className="mt-2 h-40 w-full rounded-xl object-cover"
           />
         )}
       </div>
@@ -129,9 +131,9 @@ const PostForm = ({ postToEdit = {}, onCloseModal }) => {
 
         <button
           type="submit"
-          className="bg-primary mt-3 w-full cursor-pointer rounded-md py-2 text-xl"
+          className="bg-primary text-md mt-3 w-full cursor-pointer rounded-md py-1"
         >
-          Submit
+          Post
         </button>
       </div>
     </form>

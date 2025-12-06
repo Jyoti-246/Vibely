@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCurrentActivePost } from "../features/profile/useCurrentActivePost";
-import { IoHeart, IoHeartOutline, IoShareSocialOutline } from "react-icons/io5";
-import { BiMessageRounded } from "react-icons/bi";
 import Comment from "./Comment";
 import { useUser } from "../features/authentication/useUser";
 import { useMetaData } from "../features/Messagesfeatures/useMetaData";
@@ -10,6 +8,7 @@ import { useDeleteLike } from "../features/profile/useDeleteLike";
 import { useCreateLikes } from "../features/profile/useCreateLikes";
 import { useCreateComment } from "../features/profile/useCreateComment";
 import Button from "./Button";
+import CurrentUserInfo from "./CurrentUserInfo";
 
 const ActivePost = () => {
   const [commentMessage, setCommentMessage] = useState("");
@@ -58,78 +57,80 @@ const ActivePost = () => {
     );
   }
   return (
-    <div className="bg-secondary mx-40 my-10 flex h-160 w-220 rounded-2xl">
-      <div className="flex-1">
-        <img src={post?.image} alt="" className="h-full w-full rounded-2xl" />
+    <div className="bg-secondary mx-40 my-10 flex h-160 rounded-2xl">
+      <div className="flex-2">
+        <img
+          src={post?.image}
+          alt=""
+          className="h-full w-full rounded-2xl object-cover"
+        />
       </div>
-      <div className="flex flex-1 flex-col px-3">
-        <div className="h-140">
-          <div className="mx-2 mt-2 flex">
-            <img
-              src={user_avatar}
-              alt=""
-              className="z-10 m-1 h-10 w-10 rounded-full"
-            />
-            <div className="flex flex-col">
-              <span className="text-text-primary font-semibold">
-                {user_name}
-              </span>
-            </div>
-          </div>
-          <div className="mx-2 mt-2 flex">
-            <img
-              src={user_avatar}
-              alt=""
-              className="z-10 m-1 h-10 w-10 rounded-full"
-            />
-            <div className="flex gap-1">
-              <span className="text-text-primary font-semibold">
-                {user_name}
-              </span>
-              <span className="text-text-secondary">{post?.caption}</span>
-            </div>
-          </div>
-
-          <ul className="no-scrollbar h-[55vh] overflow-scroll">
-            {post?.comments?.map((comment) => {
+      <div className="flex flex-1 flex-col p-3">
+        <CurrentUserInfo
+          user_avatar={user_avatar}
+          user_name={user_name}
+          email={post?.caption}
+        />
+        <ul className="no-scrollbar bg-background my-5 flex flex-1 flex-col gap-2 overflow-scroll rounded-xl p-2">
+          {post?.comments
+            ?.slice()
+            .reverse()
+            .map((comment) => {
               return <Comment comment={comment} key={post.id} />;
             })}
-          </ul>
-        </div>
-        <div className="flex">
-          <input
-            type="text"
-            value={commentMessage}
-            placeholder="Enter your comment"
-            className="text-text-tertiary w-full outline-none focus:ring-0"
-            onChange={(e) => setCommentMessage(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handlePostComment()}
+        </ul>
+
+        <div className="relative flex items-center gap-2">
+          <img
+            src={metaData?.[0]?.user_avatar}
+            alt=""
+            className="z-10 h-8 w-8 rounded-lg"
           />
-          <Button label="Comment" onClick={handlePostComment} />
+
+          <div className="bg-background flex w-full overflow-hidden rounded-lg px-1 py-1">
+            <input
+              type="text"
+              className="text-text-secondary flex-1 border-0 bg-transparent px-1 text-sm font-medium outline-none focus:ring-0"
+              placeholder="Post a comment.."
+              value={commentMessage}
+              onChange={(e) => setCommentMessage(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handlePostComment()}
+            />
+
+            <Button label="Comment" onClick={handlePostComment} />
+          </div>
         </div>
-        <div className="text-text-primary mt-3 flex gap-3 border-t py-3 text-xl">
-          <button className="flex items-center gap-1 transition">
+
+        <div className="mt-4 flex items-center gap-5">
+          <button className="flex gap-1 text-center">
             {hasLike ? (
-              <IoHeart
-                className="cursor-pointer text-red-500"
+              <i
+                class="fa-solid fa-heart cursor-pointer text-xl text-red-500"
                 onClick={handleLike}
-              />
+              ></i>
             ) : (
-              <IoHeartOutline
-                className="cursor-pointer hover:text-red-500"
+              <i
+                class="fa-regular fa-heart text-text-primary cursor-pointer text-xl hover:text-red-500"
                 onClick={handleLike}
-              />
+              ></i>
             )}
-            <span>{post?.likes?.length ?? 0}</span>
-          </button>
-          <button className="flex cursor-pointer items-center gap-1 transition hover:text-blue-500">
-            <BiMessageRounded />
-            <span>{post?.comments?.length ?? 0}</span>
+            <span className="text-text-primary text-sm font-medium">
+              {post?.likes?.length ?? 0}
+            </span>
           </button>
 
-          <button className="flex cursor-pointer items-center gap-1 transition hover:text-green-600">
-            <IoShareSocialOutline />
-            <span>{post?.share ?? 0}</span>
+          <button className="flex gap-1 text-center">
+            <i class="fa-regular fa-comment-dots text-text-primary cursor-pointer text-xl"></i>
+            <span className="text-text-primary text-sm font-medium">
+              {post?.comments?.length ?? 0}
+            </span>
+          </button>
+
+          <button className="flex gap-1 text-center">
+            <i class="fa-regular fa-paper-plane text-text-primary cursor-pointer text-xl"></i>
+            <span className="text-text-primary text-sm font-medium">
+              {post?.share ?? 0}
+            </span>
           </button>
         </div>
       </div>

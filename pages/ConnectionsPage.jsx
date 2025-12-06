@@ -41,6 +41,7 @@ const ConnectionsPage = () => {
       )
       .map((follower) => follower.followerId);
   }
+
   if (currentStatus === "followers")
     filteredConnections = followersList
       ?.filter(
@@ -82,7 +83,7 @@ const ConnectionsPage = () => {
           currentStatus={currentStatus}
           followings={followings}
         />
-        <RequestsList sentRequests={sentRequests} />
+        <RequestsList sentRequests={sentRequests} userId={userId} />
       </div>
     </div>
   );

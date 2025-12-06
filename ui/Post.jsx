@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { IoShareSocialOutline } from "react-icons/io5";
 import { useDeletePost } from "../features/FeedPage/useDeletePost";
-import Modal from "./Modal";
 import Menus from "./Menus";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import ConfirmDelete from "./ConfirmDelete";
@@ -11,8 +9,13 @@ import { useDeleteLike } from "../features/profile/useDeleteLike";
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { useCreateComment } from "../features/profile/useCreateComment";
+import ModalDuplicate from "./ModalDuplicate";
+import ThreeDotMenu from "./ThreeDotMenu";
 
 const Post = ({ data, metaData }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
   const [commentMessage, setCommentMessage] = useState("");
   const navigate = useNavigate();
   const { createComment } = useCreateComment();
@@ -22,22 +25,21 @@ const Post = ({ data, metaData }) => {
   const { deletePost } = useDeletePost();
   const { deleteLike } = useDeleteLike();
   const { id: postId, userId } = data;
-
-  console.log(metaData);
+  console.log(data);
 
   const { createLike } = useCreateLikes();
 
   const hasLike = data?.likes?.some(
-    (like) => like.postId === postId && like.userId === userId,
+    (like) => like.postId === postId && like.userId === id,
   );
 
   function handleLike() {
     if (!hasLike)
       createLike({
-        userId,
+        userId: id,
         postId,
       });
-    else deleteLike({ userId, postId });
+    else deleteLike({ userId: id, postId });
   }
 
   function handlePostComment() {
@@ -45,7 +47,7 @@ const Post = ({ data, metaData }) => {
     createComment(
       {
         postId,
-        userId,
+        userId: id,
         commentMessage,
       },
       {
@@ -54,9 +56,14 @@ const Post = ({ data, metaData }) => {
     );
   }
 
+  const menuItems = [
+    { label: "Edit", onClick: () => setOpenModal(true) },
+    { label: "Delete", onClick: () => setDeleteModal(true) },
+  ];
+
   return (
     <li className="bg-secondary mt-7 gap-2 rounded-xl px-7.5 py-6">
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <NavLink
           to={`/profile/${data.userMetadata.user_name}`}
           className="flex items-center gap-2"
@@ -78,40 +85,28 @@ const Post = ({ data, metaData }) => {
           </div>
         </NavLink>
         <div>
-          <Menus>
-            <Modal>
-              <Menus.Menu>
-                <Menus.Toggle id={postId} />
-
-                <Menus.List id={postId}>
-                  {id === userId && (
-                    <>
-                      <Modal.Open opens="edit">
-                        <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-                      </Modal.Open>
-
-                      <Modal.Open opens="delete">
-                        <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-                      </Modal.Open>
-                    </>
-                  )}
-                </Menus.List>
-              </Menus.Menu>
-
-              <Modal.Window name="edit">
-                <PostForm postToEdit={data} />
-              </Modal.Window>
-
-              <Modal.Window name="delete">
-                <ConfirmDelete
-                  resourceName={postId}
-                  onConfirm={() => deletePost(postId)}
-                />
-              </Modal.Window>
-            </Modal>
-          </Menus>
+          <ThreeDotMenu items={menuItems} />
         </div>
       </div>
+
+      <ModalDuplicate
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        title="Create Post"
+      >
+        <PostForm setOpenModal={setOpenModal} postToEdit={data} />
+      </ModalDuplicate>
+
+      <ModalDuplicate
+        openModal={deleteModal}
+        setOpenModal={setDeleteModal}
+        title="Delete"
+      >
+        <ConfirmDelete
+          onCloseModal={() => setDeleteModal(false)}
+          onConfirm={() => deletePost(postId)}
+        />
+      </ModalDuplicate>
 
       <div className="mt-5">
         <img
@@ -206,7 +201,7 @@ const Post = ({ data, metaData }) => {
             onKeyDown={(e) => e.key === "Enter" && handlePostComment()}
           />
 
-          <Button label="Post" onClick={handlePostComment} />
+          <Button label="Comment" onClick={handlePostComment} />
         </div>
       </div>
     </li>

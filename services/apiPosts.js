@@ -42,7 +42,11 @@ export async function getPosts(followers) {
   return data;
 }
 
+// ("https://dteebbhsscavjajnewze.supabase.co/storage/v1/object/public/image/0.421127472402417-undefined");
+
 export async function createUpdatePost(newPost, id) {
+  console.log(newPost.image.name);
+
   const hasImagePath = newPost.image?.startsWith?.(supabaseUrl);
 
   const imageName = `${Math.random()}-${newPost.image.name}`.replaceAll(
