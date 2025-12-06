@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import {
   BiGroup,
   BiHome,
@@ -8,7 +7,6 @@ import {
   BiUser,
 } from "react-icons/bi";
 import Button from "./Button";
-import Modal from "./Modal";
 import PostForm from "../features/FeedPage/PostForm";
 import { useUser } from "../features/authentication/useUser";
 import { useMetaData } from "../features/Messagesfeatures/useMetaData";

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useDeletePost } from "../features/FeedPage/useDeletePost";
-import Menus from "./Menus";
-import { HiPencil, HiTrash } from "react-icons/hi2";
 import ConfirmDelete from "./ConfirmDelete";
 import PostForm from "../features/FeedPage/PostForm";
 import { useCreateLikes } from "../features/profile/useCreateLikes";
