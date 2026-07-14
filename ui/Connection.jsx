@@ -41,6 +41,9 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
     });
   }
 
+  console.log("metaData:", metaData);
+  console.log("username:", metaData?.user_name);
+
   return (
     <li className="bg-secondary border-border shadow-soft flex items-center justify-between gap-2 rounded-2xl border p-3">
       <CurrentUserInfo
@@ -65,7 +68,7 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
       {currentStatus === "following" && (
         <div className="flex shrink-0 gap-2">
           <NavLink to={`/profile/${metaData?.user_name}`}>
-            <Button label="Profile" onClick={{}} className="py-3" />
+            <Button label="Profile" className="py-3" />
           </NavLink>
           <Button
             label="Unfollow"
@@ -78,7 +81,7 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
         <div className="flex shrink-0 gap-2">
           {hasFollowing ? (
             <NavLink to={`/profile/${metaData?.user_name}`}>
-              <Button label="Profile" onClick={{}} className="py-3" />
+              <Button label="Profile" className="py-3" />
             </NavLink>
           ) : (
             <>
