@@ -13,7 +13,7 @@ const SignIn = () => {
 
     login({
       email: "khushi@gmail.com",
-      password: "12345",
+      password: "khushi123",
     });
   }
 
