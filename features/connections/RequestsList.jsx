@@ -2,11 +2,9 @@ import React from "react";
 import Request from "../../ui/Request";
 
 const RequestsList = ({ sentRequests, userId }) => {
-  console.log(sentRequests);
-
   return (
-    <div className="bg-secondary flex flex-1 flex-col gap-6 rounded-xl p-6">
-      <h3 className="font-Montserrat text-text-primary text-xs font-extrabold">
+    <div className="bg-secondary border-border shadow-card flex flex-1 flex-col gap-6 rounded-2xl border p-6">
+      <h3 className="font-Montserrat text-text-primary text-sm font-bold tracking-wide">
         Requests For You
       </h3>
       {sentRequests.length === 0 ? (

@@ -30,8 +30,8 @@ const RecentMessages = () => {
     return null;
 
   return (
-    <div className="bg-secondary flex flex-1 flex-col gap-6 rounded-xl p-6">
-      <h3 className="font-Montserrat text-text-primary text-xs font-extrabold">
+    <div className="bg-secondary border-border shadow-card flex flex-1 flex-col gap-6 rounded-2xl border p-6">
+      <h3 className="font-Montserrat text-text-primary text-sm font-bold tracking-wide">
         Recent Messages
       </h3>
       <ul className="flex flex-col gap-5">

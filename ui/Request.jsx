@@ -7,8 +7,6 @@ import { useDeleteRequestFollow } from "../features/profile/useDeleteRequestFoll
 import { useUpdateFollow } from "../features/profile/useUpdateFollow";
 
 const Request = ({ request, userId }) => {
-  console.log(request);
-
   const { metaData } = useMetaDataById(request);
   const { deleteRequest } = useDeleteRequestFollow();
   const { updateFollow } = useUpdateFollow();
@@ -29,8 +27,8 @@ const Request = ({ request, userId }) => {
   }
 
   return (
-    <li className="flex items-center justify-between">
-      <NavLink to={`/profile/${metaData?.user_name}`}>
+    <li className="flex items-center justify-between gap-2">
+      <NavLink to={`/profile/${metaData?.user_name}`} className="min-w-0">
         <CurrentUserInfo
           user_name={metaData?.user_name}
           user_avatar={metaData?.user_avatar}
@@ -38,7 +36,7 @@ const Request = ({ request, userId }) => {
         />
       </NavLink>
 
-      <div className="flex gap-2">
+      <div className="flex shrink-0 gap-2">
         <Button label="Accept" onClick={handleAccept} className="py-3" />
         <Button
           label="Deny"

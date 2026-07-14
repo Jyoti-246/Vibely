@@ -3,24 +3,83 @@
 
 @import "tailwindcss";
 
+@theme {
+  --font-bakbak: "Bakbak One", sans-serif;
+  --font-Montserrat: "Montserrat", sans-serif;
+
+  /* Surfaces — layered from deepest (app bg) to most raised (inputs) */
+  --color-background: #0f111a;
+  --color-secondary: #191c28;
+  --color-tertiary: #262a39;
+  --color-border: #2c3142;
+
+  /* Brand */
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #a78bfa;
+  --color-accent: #ec4899;
+
+  /* Text — tuned for AA contrast on the surfaces above */
+  --color-text-primary: #f4f5fb;
+  --color-text-secondary: #aab0c4;
+  --color-text-tertiary: #838aa0;
+
+  /* Elevation */
+  --shadow-soft: 0 4px 16px -8px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 10px 30px -16px rgba(0, 0, 0, 0.7);
+  --shadow-modal: 0 28px 70px -24px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 10px 26px -8px rgba(139, 92, 246, 0.5);
+}
+
 * {
   box-sizing: border-box;
 }
 
+body {
+  font-family: var(--font-Montserrat);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(
+      1100px 560px at 12% -12%,
+      rgba(139, 92, 246, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 520px at 100% 0%,
+      rgba(236, 72, 153, 0.07),
+      transparent 55%
+    );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-primary) 45%, transparent);
+  color: #fff;
+}
+
+/* Hidden scrollbars (opt-in) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-@theme {
-  --font-bakbak: "Bakbak One", sans-serif;
-  --font-Montserrat: "Montserrat", sans-serif;
-  --color-background: #1a1c26;
-
-  --color-primary: #8c67f6;
-  --color-secondary: #272932;
-  --color-tertiary: #383a45;
-
-  --color-text-primary: #fff;
-  --color-text-secondary: #8f8f8f;
-  --color-text-tertiary: #7f7f7f;
+/* Themed scrollbars everywhere else */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-tertiary);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #333849;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
 }

@@ -6,7 +6,11 @@ const LogoutButton = () => {
   const { logout } = useLogout();
 
   return (
-    <button className="cursor-pointer text-2xl text-stone-500" onClick={logout}>
+    <button
+      className="text-text-tertiary hover:text-text-primary cursor-pointer text-2xl transition-colors"
+      onClick={logout}
+      aria-label="Log out"
+    >
       <MdOutlineLogout />
     </button>
   );

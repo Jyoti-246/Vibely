@@ -6,7 +6,11 @@ const Comment = ({ comment }) => {
 
   return (
     <div className={`font-Montserrat flex items-center gap-2`}>
-      <img src={metaData?.user_avatar} alt="" className="h-8 rounded-md" />
+      <img
+        src={metaData?.user_avatar}
+        alt=""
+        className="h-8 w-8 shrink-0 rounded-md object-cover"
+      />
       <div className="flex flex-col">
         <span className="text-text-primary text-sm font-normal">
           {metaData?.user_name}

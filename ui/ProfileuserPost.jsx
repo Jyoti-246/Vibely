@@ -7,7 +7,11 @@ const ProfileuserPost = ({ post }) => {
   return (
     <li>
       <NavLink to={`/post-id/${postId}`}>
-        <img src={post.image} alt="" className="h-60 rounded-xl" />
+        <img
+          src={post.image}
+          alt=""
+          className="h-40 w-full rounded-xl object-cover md:h-60"
+        />
       </NavLink>
     </li>
   );

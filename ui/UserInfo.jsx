@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useCreateFollow } from "../features/profile/useCreateFollow";
 import { useDeleteRequestFollow } from "../features/profile/useDeleteRequestFollow";
 import CountInfo from "./CountInfo";
@@ -16,6 +17,7 @@ const UserInfo = ({
   requestedData,
   acceptedData,
 }) => {
+  const navigate = useNavigate();
   const { createFollow } = useCreateFollow();
   const { deleteRequest } = useDeleteRequestFollow();
 
@@ -40,10 +42,27 @@ const UserInfo = ({
         followingId: currentLogedInUserId,
       });
   }
+
+  function handleMessage() {
+    navigate("/messages", {
+      state: {
+        chatUser: {
+          id: currentProfileUserId,
+          user_name,
+          user_avatar,
+          email,
+        },
+      },
+    });
+  }
   return (
     <>
       <div className="font-Montserrat flex flex-col items-center gap-3">
-        <img src={user_avatar} alt="" className="h-30 w-30 rounded-full" />
+        <img
+          src={user_avatar}
+          alt=""
+          className="border-background ring-primary/60 relative z-10 -mt-16 h-30 w-30 rounded-full border-4 object-cover ring-2"
+        />
         <div className="flex flex-col gap-1 text-center">
           {user_name && (
             <span className="text-text-primary text-xl font-semibold">
@@ -55,8 +74,8 @@ const UserInfo = ({
               {email}
             </span>
           )}
-          <span className="text-text-secondary text-md">
-            Software Engineer|Innovator|Tech Enthu
+          <span className="text-text-secondary text-sm">
+            Software Engineer · Innovator · Tech Enthu
           </span>
           <ul className="mt-3 flex w-full gap-3">
             <CountInfo label="Posts" count={postLength} />
@@ -65,24 +84,29 @@ const UserInfo = ({
           </ul>
         </div>
         {!isCurrentLogedInUserProfile && (
-          <button
-            className="absolute right-18 cursor-pointer rounded-2xl bg-indigo-500 px-6 py-2 text-xl text-white"
-            onClick={handleFollow}
-          >
-            {hasRequest ? "Requested" : hasAccept ? "Unfollow" : "Follow"}
-          </button>
+          <div className="mt-2 flex flex-wrap justify-center gap-3">
+            <button
+              className={`cursor-pointer rounded-xl px-8 py-2 text-lg font-semibold text-white transition-all hover:-translate-y-0.5 ${
+                hasAccept
+                  ? "bg-tertiary border-border border"
+                  : "bg-primary hover:bg-primary-hover shadow-glow"
+              }`}
+              onClick={handleFollow}
+            >
+              {hasRequest ? "Requested" : hasAccept ? "Unfollow" : "Follow"}
+            </button>
+
+            {hasAccept && (
+              <button
+                className="bg-primary hover:bg-primary-hover shadow-glow cursor-pointer rounded-xl px-8 py-2 text-lg font-semibold text-white transition-all hover:-translate-y-0.5"
+                onClick={handleMessage}
+              >
+                Message
+              </button>
+            )}
+          </div>
         )}
       </div>
-      {/* {isCurrentLogedInUserProfile && (
-        <div>
-          <button className="text-md my-6 ml-21 rounded-xl bg-indigo-500 px-38 py-2 text-center">
-            Edit Profile
-          </button>
-          <button className="text-md my-6 ml-2 rounded-xl bg-indigo-500 px-38 py-2 text-center">
-            Edit Profile
-          </button>
-        </div>
-      )} */}
     </>
   );
 };

@@ -21,14 +21,10 @@ const PostForm = ({ postToEdit = {}, setOpenModal }) => {
 
   const { createPost } = useCreatePost();
   const { updatePost } = useUpdatePost();
-  const { register, handleSubmit, formState, watch } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: isEditSession ? updateValues : {},
   });
   const { errors } = formState;
-
-  console.log(updateValues);
-
-  const imageFile = watch("image");
 
   function handleButtonClick(e) {
     e.preventDefault();
@@ -44,8 +40,6 @@ const PostForm = ({ postToEdit = {}, setOpenModal }) => {
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image?.[0];
     if (isEditSession) {
-      console.log("this is edit session");
-
       updatePost(
         {
           newPost: { ...data, image: image },
@@ -54,8 +48,6 @@ const PostForm = ({ postToEdit = {}, setOpenModal }) => {
         { onSuccess: () => setOpenModal(false) },
       );
     } else {
-      console.log("this is create session");
-
       createPost(
         { newPost: { ...data, image: image, userId } },
         {
@@ -65,25 +57,21 @@ const PostForm = ({ postToEdit = {}, setOpenModal }) => {
     }
   }
 
-  function onError(errors) {
-    // console.log(errors);
-  }
-
   if (!metaData || metaData.length === 0 || isLoading || isLoadingMetaData)
     return null;
 
   return (
     <form
       action=""
-      className="bg-secondary flex min-w-md flex-col gap-4 rounded-xl"
-      onSubmit={handleSubmit(onSubmit, onError)}
+      className="bg-secondary flex w-full flex-col gap-4 rounded-xl"
+      onSubmit={handleSubmit(onSubmit)}
     >
       <CurrentUserInfo user_avatar={user_avatar} user_name={user_name} />
 
-      <div className="bg-tertiary flex h-40 w-full items-center justify-center rounded-xl">
+      <div className="bg-tertiary border-border flex h-40 w-full items-center justify-center rounded-xl border border-dashed">
         {preview === null ? (
           <div className="flex flex-col items-center gap-3">
-            <FaRegImage className="text-secondary h-8 w-8" />
+            <FaRegImage className="text-text-tertiary h-8 w-8" />
             <Button
               label="Select Image"
               className="py-2"
@@ -120,8 +108,9 @@ const PostForm = ({ postToEdit = {}, setOpenModal }) => {
             type="text"
             name="caption"
             id="caption"
+            rows={2}
             placeholder="Add a caption..."
-            className="no-scrollbar w-full pt-3 text-left text-sm focus:border-none focus:outline-none"
+            className="no-scrollbar bg-tertiary border-border text-text-primary placeholder:text-text-tertiary focus:border-primary/60 w-full resize-none rounded-xl border px-3 py-2.5 text-left text-sm outline-none"
             {...register("caption")}
           />
           <span className="text-text-primary text-[1.4rem]">
@@ -131,7 +120,7 @@ const PostForm = ({ postToEdit = {}, setOpenModal }) => {
 
         <button
           type="submit"
-          className="bg-primary text-md mt-3 w-full cursor-pointer rounded-md py-1"
+          className="bg-primary hover:bg-primary-hover shadow-glow mt-3 w-full cursor-pointer rounded-lg py-2 font-semibold transition-colors"
         >
           Post
         </button>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SignInForm from "../features/authentication/SignInForm";
 import Logo from "../ui/Logo";
 import Button from "../ui/Button";
@@ -17,7 +18,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className="bg-background flex h-screen flex-col gap-8 p-10 md:flex-row md:gap-0">
+    <div className="bg-background flex min-h-screen flex-col gap-8 p-6 md:flex-row md:gap-0 md:p-10">
       <Logo />
 
       <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
@@ -60,7 +61,7 @@ const SignIn = () => {
               onClick={handleSubmit}
             />
           </div>
-          <div className="mt-10 w-full rounded-xl bg-white px-8 py-5 shadow-2xl md:mt-0 md:flex-1">
+          <div className="mt-10 w-full rounded-2xl bg-white px-8 py-6 shadow-2xl md:mt-0 md:flex-1">
             <div className="flex flex-col items-center">
               <span className="font-bold">Sign in to vibely</span>
               <span className="text-xs font-medium text-stone-600">
@@ -68,6 +69,16 @@ const SignIn = () => {
               </span>
             </div>
             <SignInForm />
+
+            <p className="mt-4 text-center text-sm text-stone-600">
+              Don&apos;t have an account?{" "}
+              <Link
+                to="/signup"
+                className="text-primary font-semibold hover:underline"
+              >
+                Sign up
+              </Link>
+            </p>
           </div>
         </div>
       </div>

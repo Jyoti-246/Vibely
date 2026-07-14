@@ -5,9 +5,7 @@ import { useMetaDataByUsername } from "../features/Messagesfeatures/useMetaDataB
 
 const UserProfile = () => {
   const { user_name } = useParams();
-  console.log(user_name);
   const { metaData } = useMetaDataByUsername(user_name);
-  console.log(metaData);
 
   return (
     <div>

@@ -16,7 +16,7 @@ const Posts = () => {
   if (isLoading || isLoadingMetaData) return null;
 
   return (
-    <ul className="flex flex-col gap-5">
+    <ul className="mt-5 flex flex-col gap-3">
       {posts?.map((post) => {
         return <Post data={post} key={post.id} metaData={metaData} />;
       })}

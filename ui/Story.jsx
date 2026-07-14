@@ -1,35 +1,24 @@
 import React from "react";
 
-const Story = ({ data }) => {
-  // function timeAgo(timeInString) {
-  //   const now = new Date();
-  //   const date = new Date(timeInString);
-
-  //   const diff = (now - date) / 1000;
-
-  //   if (diff < 60) return `${Math.floor(diff)} seconds ago`;
-  //   if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
-  //   if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
-
-  //   return `${Math.floor(diff / 86400)} days ago`;
-  // }
-
+const Story = ({ data, onClick }) => {
   return (
-    <>
-      <li className="font-Montserrat relative shrink-0 rounded-xl font-medium">
-        <img src={data.storyImage} alt="" className="h-48 w-38 rounded-md" />
-        <div className="absolute right-2 bottom-2 left-2 z-10 flex items-center gap-2">
+    <li
+      onClick={onClick}
+      className="font-Montserrat flex w-16 shrink-0 cursor-pointer flex-col items-center gap-1.5"
+    >
+      <div className="from-primary to-accent rounded-full bg-gradient-to-tr p-[2.5px]">
+        <div className="bg-background rounded-full p-[2px]">
           <img
             src={data.userMetadata.user_avatar}
             alt=""
-            className="border-text-primary h-7 w-7 rounded-full border-[0.6px]"
+            className="h-14 w-14 rounded-full object-cover transition-transform duration-200 hover:scale-105"
           />
-          <span className="max-w-30 truncate text-[12px] font-medium text-white">
-            {data.userMetadata.user_name}
-          </span>
         </div>
-      </li>
-    </>
+      </div>
+      <span className="text-text-secondary w-full truncate text-center text-[11px] font-medium">
+        {data.userMetadata.user_name}
+      </span>
+    </li>
   );
 };
 

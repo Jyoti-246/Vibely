@@ -5,8 +5,13 @@ const NavItem = ({ to, label, icon: Icon }) => {
   return (
     <NavLink
       to={to}
+      end={to === "/"}
       className={({ isActive }) =>
-        `hover:text-text-primary flex flex-col items-center rounded-xl px-4 py-2 ${isActive ? " bg-background text-text-primary" : "text-text-secondary"}`
+        `flex flex-col items-center gap-1 rounded-xl px-5 py-2.5 transition-colors duration-200 ${
+          isActive
+            ? "bg-primary/15 text-primary"
+            : "text-text-secondary hover:bg-tertiary/60 hover:text-text-primary"
+        }`
       }
     >
       <Icon className="text-2xl" />

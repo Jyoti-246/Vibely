@@ -23,7 +23,6 @@ const Post = ({ data, metaData }) => {
   const { deletePost } = useDeletePost();
   const { deleteLike } = useDeleteLike();
   const { id: postId, userId } = data;
-  console.log(data);
 
   const { createLike } = useCreateLikes();
 
@@ -60,7 +59,7 @@ const Post = ({ data, metaData }) => {
   ];
 
   return (
-    <li className="bg-secondary mt-7 gap-2 rounded-xl px-7.5 py-6">
+    <li className="bg-secondary border-border shadow-card gap-2 rounded-2xl border px-4 py-5 md:px-7.5 md:py-6">
       <div className="flex items-center justify-between">
         <NavLink
           to={`/profile/${data.userMetadata.user_name}`}
@@ -82,9 +81,11 @@ const Post = ({ data, metaData }) => {
             </div>
           </div>
         </NavLink>
-        <div>
-          <ThreeDotMenu items={menuItems} />
-        </div>
+        {userId === id && (
+          <div>
+            <ThreeDotMenu items={menuItems} />
+          </div>
+        )}
       </div>
 
       <ModalDuplicate
@@ -189,7 +190,7 @@ const Post = ({ data, metaData }) => {
           className="z-10 h-8 w-8 rounded-lg"
         />
 
-        <div className="bg-background flex w-full overflow-hidden rounded-lg px-1 py-1">
+        <div className="bg-tertiary border-border flex w-full items-center overflow-hidden rounded-xl border px-1.5 py-1">
           <input
             type="text"
             className="text-text-secondary flex-1 border-0 bg-transparent px-1 text-sm font-medium outline-none focus:ring-0"

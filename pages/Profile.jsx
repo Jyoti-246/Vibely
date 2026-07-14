@@ -1,6 +1,7 @@
 import React from "react";
 import UserInfo from "../ui/UserInfo";
 import ProfileUserPosts from "../ui/ProfileUserPosts";
+import LogoutButton from "../ui/LogoutButton";
 import { useUser } from "../features/authentication/useUser";
 import { useMetaData } from "../features/Messagesfeatures/useMetaData";
 import { useCurrentUserPosts } from "../features/FeedPage/useCurrentUserPosts";
@@ -57,15 +58,20 @@ const Profile = ({ metaData }) => {
 
   if (isLoading || isLoadingMetaData) return null;
   return (
-    <div className="no-scrollbar relative h-screen overflow-scroll md:px-10 lg:px-20">
-      <div className="h-52 w-full overflow-hidden rounded-b-2xl">
+    <div className="min-h-screen">
+      <div className="relative h-40 w-full overflow-hidden md:h-56">
         <img
-          src="../coverImage.jpg"
+          src="/coverImage.jpg"
           alt=""
           className="h-full w-full object-cover"
         />
+        {isCurrentLogedInUserProfile && (
+          <div className="absolute top-3 right-3 md:hidden">
+            <LogoutButton />
+          </div>
+        )}
       </div>
-      <div className="absolute top-37 md:mr-10 lg:mr-20">
+      <div className="px-3 md:px-10 lg:px-20">
         <UserInfo
           user_name={user_name}
           user_avatar={user_avatar}

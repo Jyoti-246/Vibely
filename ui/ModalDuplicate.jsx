@@ -4,8 +4,8 @@ import { HiXMark } from "react-icons/hi2";
 const ModalDuplicate = ({ openModal, children, setOpenModal, title }) => {
   if (!openModal) return null;
   return (
-    <div className="fixed inset-0 z-20 flex h-screen w-full items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-secondary text-text-primary font-Montserrat flex flex-col gap-6 rounded-2xl p-5">
+    <div className="fixed inset-0 z-50 flex h-screen w-full items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+      <div className="bg-secondary text-text-primary font-Montserrat border-border shadow-modal flex max-h-[90dvh] w-full max-w-md flex-col gap-6 overflow-y-auto rounded-2xl border p-5">
         <div className="flex justify-between">
           <span className="text-lg font-semibold">{title}</span>
           <button

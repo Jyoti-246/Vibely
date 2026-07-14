@@ -51,14 +51,16 @@ const ConnectionsPage = () => {
       .map((follower) => follower.followingId);
 
   return (
-    <div className="flex h-screen flex-col px-10 py-10">
-      <h1 className="text-text-primary text-4xl font-bold">Connections</h1>
+    <div className="flex flex-col px-4 py-6 md:h-screen md:px-10 md:py-10">
+      <h1 className="text-text-primary text-3xl font-bold md:text-4xl">
+        Connections
+      </h1>
       <div className="mt-8 flex w-fit gap-6">
         <NavLink
-          className={`pb-2 font-medium transition-all ${
+          className={`pb-2 font-semibold transition-all ${
             currentStatus === "followers"
-              ? "border-text-primary text-text-primary border-b-2"
-              : "text-text-secondary"
+              ? "border-primary text-text-primary border-b-2"
+              : "text-text-secondary hover:text-text-primary"
           }`}
           to={`?status=followers`}
         >
@@ -66,17 +68,17 @@ const ConnectionsPage = () => {
         </NavLink>
 
         <NavLink
-          className={`pb-2 font-medium transition-all ${
+          className={`pb-2 font-semibold transition-all ${
             currentStatus === "following"
-              ? "border-text-primary text-text-primary border-b-2"
-              : "text-text-secondary"
+              ? "border-primary text-text-primary border-b-2"
+              : "text-text-secondary hover:text-text-primary"
           }`}
           to={`?status=following`}
         >
           My Following
         </NavLink>
       </div>
-      <div className="flex gap-6 overflow-y-auto">
+      <div className="mt-4 flex flex-col gap-6 overflow-y-auto md:flex-row">
         <ConnectionList
           filteredConnections={filteredConnections}
           userId={userId}

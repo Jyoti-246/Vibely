@@ -26,31 +26,35 @@ const SignInForm = () => {
   }
 
   return (
-    <form action="" className="flex flex-col gap-2" onSubmit={handleSubmit}>
-      <label htmlFor="email">Email address</label>
+    <form action="" className="mt-4 flex flex-col gap-1.5" onSubmit={handleSubmit}>
+      <label htmlFor="email" className="text-sm font-medium text-stone-700">
+        Email address
+      </label>
       <input
         type="email"
         name="email"
         id="email"
         value={email}
         autoComplete="username"
-        className="rounded-sm border border-stone-300 py-2 text-center"
+        className="mb-2 rounded-lg border border-stone-300 px-3 py-2.5 text-stone-800 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password" className="text-sm font-medium text-stone-700">
+        Password
+      </label>
       <input
         type="password"
         name="password"
         id="password"
         value={password}
         autoComplete="current-password"
-        className="rounded-sm border border-stone-300 py-2 text-center"
+        className="rounded-lg border border-stone-300 px-3 py-2.5 text-stone-800 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
         onChange={(e) => setPassword(e.target.value)}
       />
 
       <button
         type="submit"
-        className="text-bold text-md mt-4 cursor-pointer rounded-md bg-gray-800 py-2 text-white"
+        className="bg-primary hover:bg-primary-hover mt-5 cursor-pointer rounded-lg py-2.5 font-semibold text-white shadow-md transition-colors"
       >
         Submit
       </button>

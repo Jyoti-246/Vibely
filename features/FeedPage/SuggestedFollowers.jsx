@@ -7,17 +7,14 @@ import { useMetaData } from "../Messagesfeatures/useMetaData";
 const SuggestedFollowers = () => {
   const { user } = useUser();
   const { metaData } = useMetaData(user?.email);
-  console.log(metaData);
 
   const { allMetadata, isLoading } = useAllMetadata();
 
   if (isLoading) return null;
 
-  console.log(allMetadata);
-
   return (
-    <div className="bg-secondary flex flex-1 flex-col gap-6 rounded-xl p-6">
-      <h3 className="font-Montserrat text-text-primary text-xs font-extrabold">
+    <div className="bg-secondary border-border shadow-card flex flex-1 flex-col gap-6 rounded-2xl border p-6">
+      <h3 className="font-Montserrat text-text-primary text-sm font-bold tracking-wide">
         Suggestion For You
       </h3>
       <ul className="flex flex-col gap-5">

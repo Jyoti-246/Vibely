@@ -20,8 +20,6 @@ const ActivePost = () => {
 
   const { post } = useCurrentActivePost(postId);
 
-  console.log(post);
-
   const { createLike } = useCreateLikes();
   const { deleteLike } = useDeleteLike();
   const { createComment } = useCreateComment();
@@ -34,7 +32,6 @@ const ActivePost = () => {
   );
 
   function handleLike() {
-    console.log(hasLike);
     if (!hasLike)
       createLike({
         userId,
@@ -57,12 +54,12 @@ const ActivePost = () => {
     );
   }
   return (
-    <div className="bg-secondary mx-40 my-10 flex h-160 rounded-2xl">
-      <div className="flex-2">
+    <div className="bg-secondary border-border shadow-card mx-3 my-6 flex flex-col rounded-2xl border md:mx-10 md:my-10 md:h-160 md:flex-row lg:mx-40">
+      <div className="md:flex-2">
         <img
           src={post?.image}
           alt=""
-          className="h-full w-full rounded-2xl object-cover"
+          className="h-64 w-full rounded-t-2xl object-cover md:h-full md:rounded-l-2xl md:rounded-tr-none"
         />
       </div>
       <div className="flex flex-1 flex-col p-3">
@@ -71,7 +68,7 @@ const ActivePost = () => {
           user_name={user_name}
           email={post?.caption}
         />
-        <ul className="no-scrollbar bg-background my-5 flex flex-1 flex-col gap-2 overflow-scroll rounded-xl p-2">
+        <ul className="no-scrollbar bg-background border-border my-5 flex max-h-72 flex-1 flex-col gap-2 overflow-scroll rounded-xl border p-3 md:max-h-none">
           {post?.comments
             ?.slice()
             .reverse()
@@ -87,7 +84,7 @@ const ActivePost = () => {
             className="z-10 h-8 w-8 rounded-lg"
           />
 
-          <div className="bg-background flex w-full overflow-hidden rounded-lg px-1 py-1">
+          <div className="bg-tertiary border-border flex w-full items-center overflow-hidden rounded-xl border px-1.5 py-1">
             <input
               type="text"
               className="text-text-secondary flex-1 border-0 bg-transparent px-1 text-sm font-medium outline-none focus:ring-0"

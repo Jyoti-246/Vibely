@@ -42,14 +42,14 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
   }
 
   return (
-    <li className="bg-secondary flex items-center justify-between rounded-2xl p-3">
+    <li className="bg-secondary border-border shadow-soft flex items-center justify-between gap-2 rounded-2xl border p-3">
       <CurrentUserInfo
         user_name={metaData?.user_name}
         user_avatar={metaData?.user_avatar}
         email={metaData?.email}
       />
       {currentStatus === "requests" && (
-        <div className="flex gap-2">
+        <div className="flex shrink-0 gap-2">
           <Button
             label="Accept"
             onClick={() => handleRequestAccept(user, request, "accepted")}
@@ -63,7 +63,7 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
         </div>
       )}
       {currentStatus === "following" && (
-        <div className="flex gap-2">
+        <div className="flex shrink-0 gap-2">
           <NavLink to={`/profile/${metaData?.user_name}`}>
             <Button label="Profile" onClick={{}} className="py-3" />
           </NavLink>
@@ -75,7 +75,7 @@ const Connection = ({ request, userId: user, currentStatus, followings }) => {
         </div>
       )}
       {currentStatus === "followers" && (
-        <div className="flex gap-2">
+        <div className="flex shrink-0 gap-2">
           {hasFollowing ? (
             <NavLink to={`/profile/${metaData?.user_name}`}>
               <Button label="Profile" onClick={{}} className="py-3" />

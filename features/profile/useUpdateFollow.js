@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getUpdateFollow } from "../../services/apiFollowers";
-import toast from "react-hot-toast";
 
 export function useUpdateFollow() {
   const queryClient = useQueryClient();
@@ -12,14 +11,9 @@ export function useUpdateFollow() {
   } = useMutation({
     mutationFn: getUpdateFollow,
     onSuccess: () => {
-      toast.success("Follow successfully updated");
-
-      queryClient.invalidateQueries({
-        queryKey: ["followers"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["followers"] });
+      queryClient.invalidateQueries({ queryKey: ["specific-follow-info"] });
     },
-
-    onError: () => toast.onError("Follow could not updated"),
   });
 
   return { updateFollow, isLoading, error };

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createMessage as createMessageApi } from "../../services/apiMessages";
-import toast from "react-hot-toast";
 
 export function useCreateMessage() {
   const queryClient = useQueryClient();
+
   const {
     mutate: createMessage,
     isLoading,
@@ -12,9 +12,10 @@ export function useCreateMessage() {
     mutationFn: createMessageApi,
     mutationKey: ["messages"],
     onSuccess: () => {
-      queryClient.invalidateQueries(["currentChat"]);
+      // Refreshes both the open chat (["messages", userId, chatUserId]) and the
+      // conversations list (["messages", userId]).
+      queryClient.invalidateQueries({ queryKey: ["messages"] });
     },
-    onError: (err) => toast.error(err.message),
   });
 
   return { createMessage, isLoading, error };
