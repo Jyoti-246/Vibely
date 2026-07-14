@@ -24,6 +24,13 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "5mb" }));
 
+app.get("/", (_req, res) => {
+  res.json({
+    message: "Vibely API is running 🚀",
+    health: "/health",
+  });
+});
+
 // Serve uploaded images
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

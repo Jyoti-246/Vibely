@@ -1,6 +1,5 @@
 // Central client for the Node/MongoDB backend (replaces the Supabase client).
-const BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 
 const TOKEN_KEY = "vibely_token";
 
@@ -50,7 +49,11 @@ export async function api(path, { method = "GET", body, isForm = false } = {}) {
 export async function uploadImage(file) {
   const form = new FormData();
   form.append("file", file);
-  const { url } = await api("/upload", { method: "POST", body: form, isForm: true });
+  const { url } = await api("/upload", {
+    method: "POST",
+    body: form,
+    isForm: true,
+  });
   return url;
 }
 
