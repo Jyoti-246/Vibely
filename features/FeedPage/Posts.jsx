@@ -5,7 +5,7 @@ import { useFollowers } from "./useFollowers";
 import { useUser } from "../authentication/useUser";
 import { useMetaData } from "../Messagesfeatures/useMetaData";
 // import { useLikes } from "../profile/useLikes";
-import EmptyFeed from "../../ui/EmptyFeed";
+import EmptyFeed from "../../ui/EmptyFeed.jsx";
 
 const Posts = () => {
   const { isLoading, user } = useUser();
