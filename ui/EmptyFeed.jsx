@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Users } from "lucide-react";
+import { LuSparkles } from "react-icons/lu";
+import { FiUsers } from "react-icons/fi";
 
 const EmptyFeed = () => {
   return (
     <div className="mt-5 flex flex-col items-center rounded-2xl bg-white px-8 py-14 text-center shadow">
       <div className="mb-6 rounded-full bg-violet-100 p-4">
-        <Sparkles className="h-10 w-10 text-violet-600" />
+        <LuSparkles className="h-10 w-10 text-violet-600" />
       </div>
 
       <h2 className="text-2xl font-bold text-stone-800">
@@ -24,7 +25,7 @@ const EmptyFeed = () => {
         to="/discover"
         className="bg-primary hover:bg-primary-hover mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold text-white transition"
       >
-        <Users size={18} />
+        <FiUsers size={18} />
         Discover People
       </Link>
     </div>
