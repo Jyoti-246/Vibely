@@ -4,8 +4,8 @@ import { usePosts } from "./usePosts";
 import { useFollowers } from "./useFollowers";
 import { useUser } from "../authentication/useUser";
 import { useMetaData } from "../Messagesfeatures/useMetaData";
-import EmptyFeed from "../../ui/EmptyFeed";
 // import { useLikes } from "../profile/useLikes";
+import EmptyFeed from "../../ui/EmptyFeed";
 
 const Posts = () => {
   const { isLoading, user } = useUser();
