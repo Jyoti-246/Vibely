@@ -55,18 +55,28 @@ router.post("/signup", async (req, res) => {
 
 // POST /api/auth/login
 router.post("/login", async (req, res) => {
+  console.time("login");
   const { email, password } = req.body || {};
+
   if (!email || !password)
     return res.status(400).json({ error: "Email and password are required" });
 
+  console.time("findUser");
   const user = await User.findOne({ email }).lean();
   if (!user || !user.password)
     return res.status(401).json({ error: "Invalid email or password" });
+  console.timeEnd("findUser");
 
+  console.time("compare");
   const ok = await bcrypt.compare(password, user.password);
   if (!ok) return res.status(401).json({ error: "Invalid email or password" });
+  console.timeEnd("compare");
 
+  console.time("token");
   const token = signToken(user);
+  console.timeEnd("token");
+
+  console.timeEnd("login");
   res.json({ token, user: publicUser(user) });
 });
 

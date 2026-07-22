@@ -15,6 +15,10 @@ const Posts = () => {
 
   if (isLoading || isLoadingMetaData) return null;
 
+  if (!posts || posts.length === 0) {
+    return <EmptyFeed />;
+  }
+
   return (
     <ul className="mt-5 flex flex-col gap-3">
       {posts?.map((post) => {

@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 import { useLogin } from "../features/authentication/useLogin";
 
 const SignIn = () => {
-  const { login } = useLogin();
+  const { login, isPending } = useLogin();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -56,7 +56,15 @@ const SignIn = () => {
         <div className="w-full md:mt-0 md:flex-1">
           <div className="flex justify-center p-2">
             <Button
-              label="Login as a test user"
+              label={
+                isPending ? (
+                  <>
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                  </>
+                ) : (
+                  "Login as a test user"
+                )
+              }
               className="rounded-2xl px-10 py-4"
               onClick={handleSubmit}
             />

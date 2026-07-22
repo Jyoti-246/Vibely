@@ -9,7 +9,7 @@ const SignUpForm = () => {
   const [user_name, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signup, isLoading } = useSignup();
+  const { signup, isPending } = useSignup();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30,6 +30,7 @@ const SignUpForm = () => {
         placeholder="jane_doe"
         className={`mb-2 ${inputClass}`}
         onChange={(e) => setUserName(e.target.value)}
+        disabled={isPending}
       />
 
       <label htmlFor="signup-email" className={labelClass}>
@@ -43,6 +44,7 @@ const SignUpForm = () => {
         placeholder="you@example.com"
         className={`mb-2 ${inputClass}`}
         onChange={(e) => setEmail(e.target.value)}
+        disabled={isPending}
       />
 
       <label htmlFor="signup-password" className={labelClass}>
@@ -56,14 +58,21 @@ const SignUpForm = () => {
         placeholder="At least 4 characters"
         className={inputClass}
         onChange={(e) => setPassword(e.target.value)}
+        disabled={isPending}
       />
 
       <button
         type="submit"
-        disabled={isLoading}
+        disabled={isPending}
         className="bg-primary hover:bg-primary-hover mt-5 cursor-pointer rounded-lg py-2.5 font-semibold text-white shadow-md transition-colors disabled:opacity-60"
       >
-        {isLoading ? "Creating account..." : "Create account"}
+        {isPending ? (
+          <>
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+          </>
+        ) : (
+          "Create account"
+        )}
       </button>
     </form>
   );

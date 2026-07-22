@@ -66,7 +66,7 @@ const Messages = () => {
     return null;
 
   return (
-    <div className="flex h-[calc(100dvh-4rem)] gap-4 p-3 md:h-screen md:p-6">
+    <div className="flex h-[calc(100dvh-4rem)] gap-4 overflow-hidden p-3 md:h-screen md:p-6">
       <div
         className={`${
           mobileView === "chat" ? "hidden" : "flex"
